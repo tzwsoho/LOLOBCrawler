@@ -1,33 +1,58 @@
 # LOLOBCrawler
+
 抓取TGP上的LOL OB文件，并且提供OB服务器功能
 
 文件列表：
+
 launch.js—————————用于启动LOL进程
+
 lol_ob.ico————————作为网站的favicon.ico
+
 ob_crawler.js—————爬取TGP上的OB文件，并把OB文件信息保存到数据库
+
 ob_http.js————————提供收集到的OB文件信息，以及提供OB服务器功能
+
 ob_main.js————————主逻辑
+
 ob_resolver.js————OB文件解析器
 
+
+
 mysql数据表：
+
 CREATE TABLE `ob_info` (
   `log_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'OB 收录日期',
+  
   `game_id` int(11) unsigned NOT NULL COMMENT '游戏 ID',
+  
   `ob_file_status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'OB 文件状态：0 - 待下载，1 - 已下载，2 - 已删除',
+  
   `ob_file_url` varchar(512) NOT NULL COMMENT 'OB 文件下载路径',
+  
   `encryption_key` varchar(255) NOT NULL COMMENT '通讯密钥',
+  
   `platform_id` varchar(16) NOT NULL COMMENT '对战平台服务器名称',
+  
   `area_id` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '游戏服务器分区 ID',
+  
   `game_start_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '游戏开始时间日期',
+  
   `game_length` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '游戏时长',
+  
   `participants` varchar(2048) NOT NULL COMMENT '召唤师列表',
+  
   `banned` varchar(1024) NOT NULL COMMENT '禁用的英雄列表',
+  
   PRIMARY KEY (`game_id`,`platform_id`),
+  
   KEY `k` (`game_id`,`platform_id`)
+  
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
 
 依赖库：
+
 npm install --save -g colors
+
 npm install --save -g mysql
 
 使用方法：
